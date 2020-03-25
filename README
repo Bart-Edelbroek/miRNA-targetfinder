@@ -1,0 +1,3 @@
+For the project I would like to create a package that will generate a visual output of a miRNA-target search.
+
+As part of my research I have identified a list of genes which are potentially targeted by one of two microRNAs. While there are packages out there that can calculate the binding energy of a given RNA-RNA pair (IntaRNA, Freiburg), I would like to be able to feed the program a number of target genes, and create an output based on the total findings. Ideally the program would also take gene names as opposed to RNA sequences, and output a plot which identifies where the microRNAs bind their targets.
