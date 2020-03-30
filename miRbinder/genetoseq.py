@@ -38,5 +38,5 @@ class Gene2seq(object):
 		mRNAs = self.genetomRNA(self.genelist, self.gfffile)
 		newbed = self.mRNAtobed(mRNAs, self.oribed)
 		bt = pybedtools.BedTool(newbed, from_string=True)
-		genseq = bt.sequence(fi=self.fastaref, s=True)
+		genseq = bt.sequence(fi=self.fastaref, s=True, name=True)
 		return(open(genseq.seqfn).read())
