@@ -8,11 +8,13 @@ import numpy as np
 
 class Analysis(object):
 	"""docstring for Analysis"""
-	def __init__(self, genelist, steps):
+	def __init__(self, genelist, steps, outfig1, outfig2):
 		self.genelist = open(genelist).read().split('\n')
 		self.steps = steps
+		self.outfig1 = outfig1
+		self.outfig2 = outfig2
 
-	def plotoverlay(self, genelist):
+	def plotoverlay(self, genelist, outfig1):
 		for a in range(1,(len(genelist)+1)):
 			i = pd.read_csv(('MYPROFILEFILE-t'+str(a)+'q1.csv'), sep=';')
 			x = i['idx']/len(i['idx'])
@@ -27,10 +29,10 @@ class Analysis(object):
 			#axes.set_ylim([-15,0])
 			plt.plot(x,y,label=str(i.columns[1]))
 			plt.legend(loc='center left', bbox_to_anchor=(1.04, 0.5))
-		plt.savefig('fig1.pdf', bbox_inches='tight')
+		plt.savefig(outfig1, bbox_inches='tight')
 		plt.clf()
 
-	def plotcombined(self, genelist, steps):
+	def plotcombined(self, genelist, steps, outfig2):
 		comb = np.array([])
 		for a in range(1,(len(genelist)+1)):
 			i = pd.read_csv(('MYPROFILEFILE-t'+str(a)+'q1.csv'), sep=';')
@@ -49,8 +51,8 @@ class Analysis(object):
 		y = (np.mean(np.array_split(comb,len(genelist)), axis=0))
 		x = np.linspace(0,1, int(steps))
 		plt.plot((x),y)
-		plt.savefig('fig2.pdf')
+		plt.savefig(outfig2)
 
 	def run(self):
-		overlayplot = self.plotoverlay(self.genelist)
-		plotcomb = self.plotcombined(self.genelist, self.steps)
+		overlayplot = self.plotoverlay(self.genelist, self.outfig1)
+		plotcomb = self.plotcombined(self.genelist, self.steps, self.outfig2)
